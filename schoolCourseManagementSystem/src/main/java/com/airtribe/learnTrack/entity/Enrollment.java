@@ -3,7 +3,6 @@ package com.airtribe.learnTrack.entity;
 import java.time.LocalDate;
 
 public class Enrollment {
-//    d, studentId, courseId, enrollmentDate, status
     private int id;
     private int studentId;
     private int courseId;
