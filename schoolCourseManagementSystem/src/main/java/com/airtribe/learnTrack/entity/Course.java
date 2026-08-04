@@ -10,12 +10,10 @@ public class Course {
     public Course() {
     }
 
-    public Course(int id, String courseName, String description, int durationInWeeks, boolean active) {
-        this.id = id;
+    public Course(String courseName, String description, int durationInWeeks) {
         this.courseName = courseName;
         this.description = description;
         this.durationInWeeks = durationInWeeks;
-        this.active = active;
     }
 
     public int getId() {
@@ -56,5 +54,16 @@ public class Course {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                ", description='" + description + '\'' +
+                ", durationInWeeks=" + durationInWeeks +
+                ", active=" + active +
+                '}';
     }
 }

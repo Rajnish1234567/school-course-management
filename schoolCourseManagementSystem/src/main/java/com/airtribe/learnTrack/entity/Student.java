@@ -9,16 +9,14 @@ public class Student extends Person{
         super();
     }
 
-    public Student(int id, String firstName, String lastName, String email, String batch, boolean active) {
-        super(id,firstName,lastName,email);
+    public Student(String firstName, String lastName, String email, String batch) {
+        super(firstName,lastName,email);
         this.batch = batch;
-        this.active = active;
     }
 
-    public Student(int id, String firstName, String lastName, String batch, boolean active) {
-        super(id,firstName,lastName);
+    public Student( String firstName, String lastName, String batch) {
+        super(firstName,lastName);
         this.batch = batch;
-        this.active = active;
     }
 
     public String getBatch() {

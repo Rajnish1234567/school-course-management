@@ -10,15 +10,13 @@ public class Person {
 
     }
 
-    public Person(int id, String firstName, String lastName, String email) {
-        this.id = id;
+    public Person(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public Person(int id, String firstName, String lastName) {
-        this.id = id;
+    public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

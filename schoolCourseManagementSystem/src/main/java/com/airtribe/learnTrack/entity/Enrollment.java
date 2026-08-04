@@ -7,18 +7,27 @@ public class Enrollment {
     private int studentId;
     private int courseId;
     private LocalDate enrollmentDate;
-    private boolean status;
+    private String status;
 
     public Enrollment () {
 
     }
 
-    public Enrollment(int id, int studentId, int courseId, LocalDate enrollmentDate, boolean status) {
-        this.id = id;
+    public Enrollment( int studentId, int courseId, LocalDate enrollmentDate) {
         this.studentId = studentId;
         this.courseId = courseId;
         this.enrollmentDate = enrollmentDate;
-        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Enrollment{" +
+                "id=" + id +
+                ", studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", enrollmentDate=" + enrollmentDate +
+                ", status='" + status + '\'' +
+                '}';
     }
 
     public int getId() {
@@ -53,11 +62,11 @@ public class Enrollment {
         this.enrollmentDate = enrollmentDate;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

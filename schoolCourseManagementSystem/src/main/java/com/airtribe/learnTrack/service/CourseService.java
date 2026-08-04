@@ -1,4 +1,12 @@
 package com.airtribe.learnTrack.service;
 
-public class CourseService {
+import com.airtribe.learnTrack.entity.Course;
+
+import java.util.List;
+
+public interface CourseService {
+    String addCourse(Course course);
+    List<Course> getAllCourse();
+    String activateCourse(int id);
+    String deactivateCourse(int id);
 }
