@@ -1,6 +1,7 @@
 package com.airtribe.learnTrack.service;
 
 import com.airtribe.learnTrack.entity.Student;
+import com.airtribe.learnTrack.enums.StudentStatus;
 import com.airtribe.learnTrack.exception.EntityNotFoundException;
 import com.airtribe.learnTrack.repository.StudentRepository;
 
@@ -17,7 +18,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public String addStudent(Student student) {
-        student.setActive(true);
+        student.setStatus(StudentStatus.ACTIVE);
         boolean flag = studentRepository.addStudent(student);
         if (flag) {
             return "Student saved successfully";
@@ -39,9 +40,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String deleteStudent(int id) {
+    public String deActiveStudent(int id) {
         try{
-            studentRepository.deleteStudent(id);
+            studentRepository.deActivateStudent(id);
             return String.format("student deleted with id: %d", id);
         } catch (EntityNotFoundException ex) {
             return ex.getMessage();

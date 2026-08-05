@@ -1,6 +1,7 @@
 package com.airtribe.learnTrack.repository;
 
 import com.airtribe.learnTrack.entity.Student;
+import com.airtribe.learnTrack.enums.StudentStatus;
 import com.airtribe.learnTrack.exception.EntityNotFoundException;
 import com.airtribe.learnTrack.util.IdGenerator;
 
@@ -22,14 +23,14 @@ public class StudentRepository {
 
     public Optional<Student> getStudentById(int id) {
         return studentList.stream()
-                .filter(student -> student.getId() == id && student.isActive())
+                .filter(student -> student.getId() == id )
                 .findFirst();
     }
 
-    public boolean deleteStudent(int id) {
+    public boolean deActivateStudent(int id) {
         Optional<Student> optionalStudent = getStudentById(id);
         if (optionalStudent.isPresent()) {
-            optionalStudent.get().setActive(false);
+            optionalStudent.get().setStatus(StudentStatus.DEACTIVE);
             return true;
         }
         throw new EntityNotFoundException(String.format("No student found with id: %d", id));

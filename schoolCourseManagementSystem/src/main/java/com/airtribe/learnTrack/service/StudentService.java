@@ -11,5 +11,5 @@ public interface StudentService {
 
     Student getStudentById(int id) ;
 
-    String deleteStudent(int id) ;
+    String deActiveStudent(int id) ;
 }

@@ -27,7 +27,7 @@ public class Main {
 
             System.out.println("\n==============================================");
             System.out.println("     STUDENT COURSE MANAGEMENT SYSTEM");
-            System.out.println("==============================================");
+            System.out.println("================================================");
 
             System.out.println("\n------ Student Management ------");
             System.out.println("1. Add Student");
@@ -115,7 +115,7 @@ public class Main {
                     int id = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.println(studentService.deleteStudent(id));
+                    System.out.println(studentService.deActiveStudent(id));
                     pressEnterToContinue(scanner);
                     break;
 
@@ -148,20 +148,29 @@ public class Main {
                 case 6:
 
                     List<Course> courses = courseService.getAllCourse();
-                    for (Course course1: courses) {
-                        System.out.println(course1.toString());
+                    if(courses.isEmpty()) {
+                        System.out.println("No course Found.");
+                    } else {
+                        for (Course course1: courses) {
+                            System.out.println(course1.toString());
+                        }
                     }
 
                     pressEnterToContinue(scanner);
 
                     break;
 
-                case 7://done till here
+                case 7:
 
                     System.out.print("Enter Course ID : ");
                     int activeCourse = scanner.nextInt();
+
                     scanner.nextLine();
-                    courseService.activateCourse(activeCourse);
+                    try{
+                        System.out.println(courseService.activateCourse(activeCourse));
+                    } catch (EntityNotFoundException ex) {
+                        System.out.println(ex.getMessage());
+                    }
 
                     pressEnterToContinue(scanner);
                     break;
@@ -169,9 +178,14 @@ public class Main {
                 case 8:
 
                     System.out.print("Enter Course ID : ");
-                    int deactiveCourse = scanner.nextInt();
+                    int deActiveCourse = scanner.nextInt();
 
-                    courseService.deactivateCourse(deactiveCourse);
+                    scanner.nextLine();
+                    try{
+                        System.out.println(courseService.deactivateCourse(deActiveCourse));
+                    } catch (EntityNotFoundException ex) {
+                        System.out.println(ex.getMessage());
+                    }
 
                     pressEnterToContinue(scanner);
                     break;

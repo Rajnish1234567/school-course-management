@@ -1,6 +1,8 @@
 package com.airtribe.learnTrack.repository;
 
 import com.airtribe.learnTrack.entity.Course;
+import com.airtribe.learnTrack.enums.CourseStatus;
+import com.airtribe.learnTrack.exception.EntityNotFoundException;
 import com.airtribe.learnTrack.util.IdGenerator;
 
 import java.util.ArrayList;
@@ -22,25 +24,25 @@ public class CourseRepository {
 
     private Optional<Course> getCourse(int id) {
         return courses.stream()
-                .filter(course -> course.getId() == id && course.isActive())
+                .filter(course -> course.getId() == id)
                 .findFirst();
     }
 
     public boolean activateCourse(int id) {
         Optional<Course> course = getCourse(id);
         if (course.isPresent()) {
-            course.get().setActive(true);
+            course.get().setStatus(CourseStatus.ACTIVE);
             return true;
         }
-        return false;
+        throw new EntityNotFoundException(String.format("No Course found with id: %d", id));
     }
 
     public boolean deactivateCourse(int id) {
         Optional<Course> course = getCourse(id);
         if (course.isPresent()) {
-            course.get().setActive(false);
+            course.get().setStatus(CourseStatus.DEACTIVE);
             return true;
         }
-        return false;
+        throw new EntityNotFoundException(String.format("No Course found with id: %d", id));
     }
 }

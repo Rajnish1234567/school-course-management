@@ -1,12 +1,22 @@
 package com.airtribe.learnTrack.entity;
 
+import com.airtribe.learnTrack.enums.StudentStatus;
+
 public class Student extends Person{
 
     private String batch;
-    private boolean active;
+    private StudentStatus status;
 
     public Student() {
         super();
+    }
+
+    public StudentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(StudentStatus status) {
+        this.status = status;
     }
 
     public Student(String firstName, String lastName, String email, String batch) {
@@ -27,20 +37,12 @@ public class Student extends Person{
         this.batch = batch;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     @Override
     public void displayDetails() {
         super.displayDetails();
         System.out.println("Student{" +
                 "batch='" + batch + '\'' +
-                ", active=" + active +
+                ", status=" + this.status +
                 '}');
     }
 }

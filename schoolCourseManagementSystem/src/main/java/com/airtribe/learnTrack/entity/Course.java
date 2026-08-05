@@ -1,11 +1,13 @@
 package com.airtribe.learnTrack.entity;
 
+import com.airtribe.learnTrack.enums.CourseStatus;
+
 public class Course {
     private int id;
     private String courseName;
     private String description;
     private int durationInWeeks;
-    private boolean active;
+    private CourseStatus status ;
 
     public Course() {
     }
@@ -14,6 +16,14 @@ public class Course {
         this.courseName = courseName;
         this.description = description;
         this.durationInWeeks = durationInWeeks;
+    }
+
+    public CourseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CourseStatus status) {
+        this.status = status;
     }
 
     public int getId() {
@@ -48,13 +58,6 @@ public class Course {
         this.durationInWeeks = durationInWeeks;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 
     @Override
     public String toString() {
@@ -63,7 +66,7 @@ public class Course {
                 ", courseName='" + courseName + '\'' +
                 ", description='" + description + '\'' +
                 ", durationInWeeks=" + durationInWeeks +
-                ", active=" + active +
+                ", status=" + this.status +
                 '}';
     }
 }

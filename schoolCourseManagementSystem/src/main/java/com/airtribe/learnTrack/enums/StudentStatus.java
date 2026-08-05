@@ -1,5 +1,5 @@
 package com.airtribe.learnTrack.enums;
 
-public enum CourseStatus {
+public enum StudentStatus {
     ACTIVE, DEACTIVE
 }
