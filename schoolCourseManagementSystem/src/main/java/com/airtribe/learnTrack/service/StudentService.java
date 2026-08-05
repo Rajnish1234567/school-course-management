@@ -2,14 +2,14 @@ package com.airtribe.learnTrack.service;
 
 import com.airtribe.learnTrack.entity.Student;
 
-import java.util.List;
+import java.util.Scanner;
 
 public interface StudentService {
-    String addStudent(Student student);
+    String addStudent(Scanner scanner);
 
-    List<Student> viewAllStudent() ;
+    void viewAllStudent() ;
 
-    Student getStudentById(int id) ;
+    void getStudentById(Scanner scanner) ;
 
-    String deActiveStudent(int id) ;
+    void deActiveStudent(Scanner scanner) ;
 }

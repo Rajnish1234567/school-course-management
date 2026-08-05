@@ -21,18 +21,20 @@ public class StudentRepository {
         return studentList.stream().toList();
     }
 
-    public Optional<Student> getStudentById(int id) {
+    public Student getStudentById(int id) {
         return studentList.stream()
-                .filter(student -> student.getId() == id )
-                .findFirst();
+                .filter(student -> student.getId() == id)
+                .findFirst()
+                .orElseThrow(() ->
+                        new EntityNotFoundException(
+                                String.format("No student found with id: %d", id)
+                        )
+                );
     }
 
     public boolean deActivateStudent(int id) {
-        Optional<Student> optionalStudent = getStudentById(id);
-        if (optionalStudent.isPresent()) {
-            optionalStudent.get().setStatus(StudentStatus.DEACTIVE);
-            return true;
-        }
-        throw new EntityNotFoundException(String.format("No student found with id: %d", id));
+        Student student = getStudentById(id);
+        student.setStatus(StudentStatus.DEACTIVE);
+        return true;
     }
 }

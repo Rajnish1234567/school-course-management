@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EnrollmentService {
 
-    boolean enrollStudent(Enrollment enrollment);
+    String enrollStudent(Enrollment enrollment);
     List<Enrollment> getEnrollmentsForStudent(int studentId);
-    boolean updateEnrollmentStatus(int enrollmentId, String status);
+    String updateEnrollmentStatus(int enrollmentId, String status);
 }

@@ -1,6 +1,7 @@
 package com.airtribe.learnTrack.repository;
 
 import com.airtribe.learnTrack.entity.Enrollment;
+import com.airtribe.learnTrack.enums.EnrollmentStatus;
 import com.airtribe.learnTrack.exception.EntityNotFoundException;
 import com.airtribe.learnTrack.util.IdGenerator;
 
@@ -28,7 +29,7 @@ public class EnrollmentRepository {
                 .filter(enrollment -> enrollment.getId() == enrollmentId)
                 .findFirst();
          if(enroll.isPresent()) {
-             enroll.get().setStatus(status);
+             enroll.get().setStatus(EnrollmentStatus.valueOf(status.toUpperCase()));
              return true;
          }
         throw new EntityNotFoundException(String.format("No Enrollment found with id: %d", enrollmentId));

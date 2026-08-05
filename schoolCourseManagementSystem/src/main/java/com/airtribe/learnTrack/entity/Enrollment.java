@@ -1,5 +1,7 @@
 package com.airtribe.learnTrack.entity;
 
+import com.airtribe.learnTrack.enums.EnrollmentStatus;
+
 import java.time.LocalDate;
 
 public class Enrollment {
@@ -7,7 +9,7 @@ public class Enrollment {
     private int studentId;
     private int courseId;
     private LocalDate enrollmentDate;
-    private String status;
+    private EnrollmentStatus status;
 
     public Enrollment () {
 
@@ -62,11 +64,11 @@ public class Enrollment {
         this.enrollmentDate = enrollmentDate;
     }
 
-    public String getStatus() {
+    public EnrollmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EnrollmentStatus status) {
         this.status = status;
     }
 }

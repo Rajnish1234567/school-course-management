@@ -14,8 +14,12 @@ public class EnrollmentServiceImpl implements EnrollmentService{
     }
 
     @Override
-    public boolean enrollStudent(Enrollment enrollment) {
-        return enrollmentRepository.enrollStudent(enrollment);
+    public String enrollStudent(Enrollment enrollment) {
+        boolean isEnrolled = enrollmentRepository.enrollStudent(enrollment);
+        if(isEnrolled)
+            return "Student with id = "+ enrollment.getStudentId() + " Enrolled.";
+        else
+            return "Enrollment Failed for student with id = "+enrollment.getStudentId();
     }
 
     @Override
@@ -24,7 +28,9 @@ public class EnrollmentServiceImpl implements EnrollmentService{
     }
 
     @Override
-    public boolean updateEnrollmentStatus(int enrollmentId, String status) {
-        return enrollmentRepository.updateEnrollmentStatus(enrollmentId, status);
+    public String updateEnrollmentStatus(int enrollmentId, String status) {
+        boolean isEnrolled  = enrollmentRepository.updateEnrollmentStatus(enrollmentId, status);
+        if (isEnrolled) return "Enrollment Status updated";
+        else return "";
     }
 }

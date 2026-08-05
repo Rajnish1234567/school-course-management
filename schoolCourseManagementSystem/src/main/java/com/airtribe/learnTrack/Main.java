@@ -1,5 +1,6 @@
 package com.airtribe.learnTrack;
 
+import com.airtribe.learnTrack.constants.MenuOptions;
 import com.airtribe.learnTrack.entity.Course;
 import com.airtribe.learnTrack.entity.Enrollment;
 import com.airtribe.learnTrack.entity.Student;
@@ -24,32 +25,7 @@ public class Main {
         boolean running = true;
 
         while (running) {
-
-            System.out.println("\n==============================================");
-            System.out.println("     STUDENT COURSE MANAGEMENT SYSTEM");
-            System.out.println("================================================");
-
-            System.out.println("\n------ Student Management ------");
-            System.out.println("1. Add Student");
-            System.out.println("2. View All Students");
-            System.out.println("3. Search Student By ID");
-            System.out.println("4. Deactivate Student");
-
-            System.out.println("\n------ Course Management ------");
-            System.out.println("5. Add Course");
-            System.out.println("6. View All Courses");
-            System.out.println("7. Activate Course");
-            System.out.println("8. Deactivate Course");
-
-            System.out.println("\n------ Enrollment Management ------");
-            System.out.println("9. Enroll Student");
-            System.out.println("10. View Student Enrollments");
-            System.out.println("11. Complete Enrollment");
-            System.out.println("12. Cancel Enrollment");
-
-            System.out.println("\n0. Exit");
-
-            System.out.print("\nEnter your choice: ");
+            MenuOptions.showMenu();
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -57,66 +33,23 @@ public class Main {
             switch (choice) {
 
                 case 1:
-
-                    System.out.println("\nAdd New Student");
-
-                    System.out.print("First Name : ");
-                    String firstName = scanner.nextLine();
-
-                    System.out.print("Last Name  : ");
-                    String lastName = scanner.nextLine();
-
-                    System.out.print("Email      : ");
-                    String email = scanner.nextLine();
-
-                    System.out.print("Batch      : ");
-                    String batch = scanner.nextLine();
-
-                    Student student = new Student(firstName, lastName, email, batch);
-
-                    System.out.println(studentService.addStudent(student));
-
-                    pressEnterToContinue(scanner);
-
+                    System.out.println(studentService.addStudent(scanner));
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 2:
-
-                    List<Student> studentList = studentService.viewAllStudent();
-                    if(!studentList.isEmpty()) {
-                        for (Student student1 : studentList) {
-                            student1.displayDetails();
-                        }
-                    } else {
-                        System.out.println(" No Student Found");
-                    }
-                    pressEnterToContinue(scanner);
+                    studentService.viewAllStudent();
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 3:
-
-                    System.out.print("Enter Student ID : ");
-                    int studentId = scanner.nextInt();
-                    scanner.nextLine();
-
-                    try {
-                        Student student1 = studentService.getStudentById(studentId);
-                        student1.displayDetails();
-                    } catch (EntityNotFoundException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-
-                    pressEnterToContinue(scanner);
+                    studentService.getStudentById(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 4:
-
-                    System.out.print("Enter Student ID : ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.println(studentService.deActiveStudent(id));
-                    pressEnterToContinue(scanner);
+                    studentService.deActiveStudent(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
 
@@ -142,7 +75,7 @@ public class Main {
                                     duration);
                     System.out.println(courseService.addCourse(course));
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 6:
@@ -156,7 +89,7 @@ public class Main {
                         }
                     }
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
 
                     break;
 
@@ -172,7 +105,7 @@ public class Main {
                         System.out.println(ex.getMessage());
                     }
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 8:
@@ -187,7 +120,7 @@ public class Main {
                         System.out.println(ex.getMessage());
                     }
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 // ================= ENROLLMENT =================
@@ -202,26 +135,33 @@ public class Main {
                     System.out.print("Course ID : ");
                     int cId = scanner.nextInt();
 
+                    scanner.nextLine();
                     Enrollment enrollment =
                             new Enrollment(sId,
                                     cId,
                                     LocalDate.now());
 
-                    enrollmentService.enrollStudent(enrollment);
+                    System.out.println(enrollmentService.enrollStudent(enrollment));
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 10:
 
                     System.out.print("Student ID : ");
                     int studentEnrollmentId = scanner.nextInt();
+
+                    scanner.nextLine();
                     List<Enrollment> enrollmentList = enrollmentService.getEnrollmentsForStudent(studentEnrollmentId);
-                    for (Enrollment enrollment1: enrollmentList) {
-                        System.out.println(enrollment1.toString());
+                    if (!enrollmentList.isEmpty()) {
+                        for (Enrollment enrollment1: enrollmentList) {
+                            System.out.println(enrollment1.toString());
+                        }
+                    } else {
+                        System.out.println("No Enrollment Present");
                     }
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 11:
@@ -229,12 +169,17 @@ public class Main {
                     System.out.print("Enrollment ID : ");
                     int completeId = scanner.nextInt();
 
-                    enrollmentService.updateEnrollmentStatus(
-                            completeId,
-                            "COMPLETED"
-                    );
+                    scanner.nextLine();
+                    try{
+                        System.out.println(enrollmentService.updateEnrollmentStatus(
+                                completeId,
+                                "COMPLETED"
+                        ));
+                    } catch (EntityNotFoundException ex) {
+                        System.out.println(ex.getMessage());
+                    }
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 case 12:
@@ -242,12 +187,17 @@ public class Main {
                     System.out.print("Enrollment ID : ");
                     int cancelId = scanner.nextInt();
 
-                    enrollmentService.updateEnrollmentStatus(
-                            cancelId,
-                            "CANCELLED"
-                    );
+                    scanner.nextLine();
+                    try{
+                        System.out.println(enrollmentService.updateEnrollmentStatus(
+                                cancelId,
+                                "CANCELLED"
+                        ));
+                    } catch (EntityNotFoundException ex) {
+                        System.out.println(ex.getMessage());
+                    }
 
-                    pressEnterToContinue(scanner);
+                    MenuOptions.pressEnterToContinue(scanner);
                     break;
 
                 // ================= EXIT =================
@@ -269,11 +219,4 @@ public class Main {
         scanner.close();
     }
 
-    private static void pressEnterToContinue(Scanner scanner) {
-        System.out.println();
-        System.out.println("----------------------------------------");
-        System.out.println("Press ENTER to return to Main Menu...");
-        System.out.println("----------------------------------------");
-        scanner.nextLine();
-    }
 }
